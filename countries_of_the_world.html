@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Countries Of The World</title>
+    <link rel="stylesheet" href="country.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Countries of the World</h1>
+      <label for="country_input">Enter Country Name:</label>
+      <div class="input-container">
+        <input type="text" id="country_input" placeholder="Philippines" />
+        <button onclick="searchCountry()" id="search_button" disabled>
+          Search
+        </button>
+      </div>
+    </div>
+
+    <div class="results-container">
+      <div id="country_details"></div>
+      <div id="other_countries"></div>
+    </div>
+
+    <script src="country.js"></script>
+  </body>
+</html>

@@ -1,0 +1,89 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
+
+* {
+  font-family: "Poppins", sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f0f0f0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+h1 {
+  color: #000;
+  margin-bottom: 20px;
+}
+
+.form-container {
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+  color: #333;
+  text-align: left;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.table-container {
+  width: 100%;
+  margin-top: 20px;
+}
+
+#book_table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#book_table th,
+#book_table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: center;
+}
+
+#book_table th {
+  background-color: #007bff;
+  color: #fff;
+}
+
+#submit_button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}

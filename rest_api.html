@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="rest_api.css" />
+    <title>Book Information</title>
+  </head>
+  <body>
+    <h1>Book Information</h1>
+
+    <div class="form-container">
+      <form id="book_form">
+        <label for="title">Title:</label>
+        <input
+          type="text"
+          id="title"
+          name="title"
+          placeholder="Enter Book Title"
+          required
+        />
+
+        <label for="author">Author:</label>
+        <input
+          type="text"
+          id="author"
+          name="author"
+          placeholder="Enter Author"
+          required
+        />
+
+        <label for="language">Language:</label>
+        <input
+          type="text"
+          id="language"
+          name="language"
+          placeholder="Enter Language"
+          required
+        />
+
+        <label for="genre">Genre:</label>
+        <select id="genre" name="genre" required>
+          <option value="Drama">Drama</option>
+          <option value="Fiction">Fiction</option>
+          <option value="NonFiction">Non Fiction</option>
+          <option value="Poetry">Poetry</option>
+        </select>
+
+        <label for="shelf">Shelf:</label>
+        <select id="shelf" name="shelf" required>
+          <option value="WantToRead">Want to Read</option>
+          <option value="CurrentlyReading">Currently Reading</option>
+          <option value="Read">Read</option>
+        </select>
+        <input type="hidden" id="book_id" />
+
+        <button type="submit" id="submit_button" disabled>Submit</button>
+      </form>
+    </div>
+
+    <h1>List of Books Saved</h1>
+
+    <div class="table-container">
+      <table id="book_table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Language</th>
+            <th>Genre</th>
+            <th>Shelf</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="table_body"></tbody>
+      </table>
+    </div>
+
+    <script src="rest_api.js"></script>
+  </body>
+</html>
