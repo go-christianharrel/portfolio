@@ -205,6 +205,21 @@ ul li a:hover {
   line-height: 1.8;
 }
 
+.container .box-container .box a {
+  display: inline-block;
+  margin-top: 10px;
+  background: var(--primary-color);
+  color: var(--extra-light);
+  padding: 10px 20px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+
+.container .box-container .box a:hover {
+  background: var(--primary-color-dark);
+}
+
 .container .box-container .box,
 .box-two:hover {
   box-shadow: 0 10px 15px rgba(0, 0, 0, 0.3);
@@ -371,7 +386,7 @@ ul li a:hover {
     text-align: center;
     grid-template-columns: repeat(1, 1fr);
   }
-  
+
   .profile-image {
     grid-area: 1;
   }
