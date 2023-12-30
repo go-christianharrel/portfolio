@@ -238,13 +238,20 @@ ul li a:hover {
 }
 
 .box-two {
-  background: var(--primary-color-dark);
+  background: var(--primary-color);
+  border-radius: 25px;
+}
+
+.box-two img {
+  height: 150px;
+  width: 100%;
+  align-self: baseline;
+  border-radius: 12px;
 }
 
 .container .box-container .box-two h3 {
   color: var(--extra-light);
   font-size: 22px;
-  padding: 10px 0;
 }
 
 .testimonials-grid {
