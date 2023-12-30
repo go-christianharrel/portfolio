@@ -109,7 +109,7 @@ ul li a:hover {
 }
 
 .profile-container {
-  min-height: 80vh;
+  min-height: 100vh;
   max-width: var(--max-width);
   margin: auto;
   padding: 1rem;
@@ -141,7 +141,7 @@ ul li a:hover {
 }
 
 .profile-title span {
-  font-weight: 700;
+  font-weight: 600;
   color: var(--primary-color);
 }
 
@@ -364,5 +364,15 @@ ul li a:hover {
 
   ul li {
     margin: 0;
+  }
+
+  .profile-container {
+    padding: 10rem 1rem 5rem 1rem;
+    text-align: center;
+    grid-template-columns: repeat(1, 1fr);
+  }
+  
+  .profile-image {
+    grid-area: 1;
   }
 }
