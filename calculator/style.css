@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  height: 100vh;
+  text-align: center;
+}
+
+nav {
+  width: 100%;
+  display: grid;
+  grid-template-areas:
+    'logo title title'
+    'report report report';
+}
+
+.logo {
+  grid-area: logo;
+}
+
+.logo img {
+  width: 40px;
+  height: 40px;
+}
+
+.title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-area: title;
+}
+
+.report {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  grid-area: report;
+}
+
+nav div {
+  border: 1px solid black;
+  padding: 10px;
+}
+
+h2 {
+  margin-top: 30px;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  height: 30vh;
+  margin-top: 30px;
+  gap: 20px;
+}
+
+.sections {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.container .sections a {
+  text-decoration: none;
+}
+
+.container .sections div {
+  width: 200px;
+  height: 150px;
+  border: 1px solid black;
+  color: black;
+  display: grid;
+  align-items: center;
+}
+
+.container .sections div:hover {
+  background-color: #6b7280;
+  cursor: pointer;
+}
+
+.name {
+  margin-top: 50px;
+  padding-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  nav {
+    grid-template-areas: 'logo title';
+  }
+
+  .container {
+    flex-direction: column;
+  }
+  .logo img {
+    width: 60px;
+    height: 60px;
+  }
+}
