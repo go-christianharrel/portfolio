@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Customer Queue</title>
+    <link rel="icon" href="../assets/icons/carrieschan-icon.png" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>Customer Queue</h1>
+      <form id="customer-form">
+        <div class="input-container">
+          <label for="name">Name:</label>
+          <input type="text" id="name" required />
+        </div>
+
+        <div class="input-container">
+          <label for="priority">Priority:</label>
+          <input type="number" id="priority" required />
+        </div>
+
+        <button type="button" id="add_button" onclick="addToQueue()">
+          Add to Queue
+        </button>
+      </form>
+
+      <button type="button" onclick="processCustomer()">
+        Process Customer
+      </button>
+
+      <div id="customer_info"></div>
+    </div>
+
+    <script src="./main.js"></script>
+  </body>
+</html>
