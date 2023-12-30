@@ -176,8 +176,8 @@ ul li a:hover {
 
 .container .box-container {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-  gap: 15px;
+  grid-template-columns: repeat(3, 2fr);
+  gap: 25px;
 }
 
 .container .box-container .box,
@@ -216,7 +216,8 @@ ul li a:hover {
   transition: 0.3s;
 }
 
-.container .box-container .box a:hover {
+.container .box-container .box a:hover,
+.box-two:hover {
   background: var(--primary-color-dark);
 }
 
@@ -313,7 +314,9 @@ ul li a:hover {
 }
 
 .gallery img {
-  width: 300px;
+  display: grid;
+  grid-template-columns: repeat(3s, 2fr);
+  width: 500px;
   border-radius: 10px;
 }
 
@@ -396,5 +399,21 @@ ul li a:hover {
 
   .profile-image {
     grid-area: 1;
+  }
+
+  .container .box-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+    gap: 15px;
+  }
+  .testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gallery img {
+    display: grid;
+    grid-template-columns: repeat(3s, 2fr);
+    width: 320px;
+    border-radius: 10px;
   }
 }
