@@ -148,6 +148,7 @@ ul li a:hover {
 .profile-description {
   line-height: 1.5rem;
   color: var(--text-light);
+  margin-bottom: 15px;
 }
 
 .profile-image {
@@ -218,6 +219,20 @@ ul li a:hover {
   cursor: pointer;
   border: none;
   outline: none;
+}
+
+.show-popup.letter{
+  grid-column: span 3;
+  background: #ffffff;;
+  color: var(--text-dark);
+  padding: 20px 20px;
+  font-size: 1.10em;
+  font-weight: bold;
+}
+
+.show-popup.letter:hover{
+  background: var(--primary-color);
+  color: var(--extra-light);
 }
 
 .container .box-container .box a:hover,
@@ -483,6 +498,11 @@ ul li a:hover {
     grid-template-columns: repeat(3s, 2fr);
     width: 260px;
     border-radius: 10px;
+  }
+
+  .show-popup.letter{
+    grid-column: span 1;
+    grid-area: 1;
   }
 
   .popup-container .popup-box {
