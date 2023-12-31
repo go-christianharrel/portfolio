@@ -205,19 +205,24 @@ ul li a:hover {
   line-height: 1.8;
 }
 
-.container .box-container .box a {
+.container .box-container .box a, .show-popup {
   display: inline-block;
   margin-top: 10px;
   background: var(--primary-color);
   color: var(--extra-light);
   padding: 10px 20px;
   border-radius: 4px;
-  text-decoration: none;
   transition: 0.3s;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  outline: none;
 }
 
 .container .box-container .box a:hover,
-.box-two:hover {
+.box-two:hover,
+.show-popup:hover,
+.popup-box .close-btn:hover {
   background: var(--primary-color-dark);
 }
 
@@ -320,6 +325,67 @@ ul li a:hover {
   border-radius: 10px;
 }
 
+.popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.popup-container.active {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity 0.4s ease;
+}
+
+.popup-container .popup-box {
+  max-width: 60%;
+  max-height: 70%;
+  width: 100%;
+  background: var(--extra-light);
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  transform: scale(0);
+  transition: transform 0.4s ease;
+  overflow-y: auto;
+}
+
+.popup-container.active .popup-box {
+  transform: scale(1);
+}
+
+.popup-box h1 {
+  color: var(--text-dark);
+  line-height: 1;
+}
+
+.popup-box p {
+  color: var(--text-light);
+  margin: 12px 0 20px;
+}
+
+.popup-box .close-btn {
+  width: 100%;
+  height: 45px;
+  background: var(--primary-color);
+  color: var(--extra-light);
+  border-radius: 4px;
+  border: none;
+  outline: none;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: 500;
+}
+
 .sort-option,
 .comment-card,
 .comment-form {
@@ -414,7 +480,26 @@ ul li a:hover {
   .gallery img {
     display: grid;
     grid-template-columns: repeat(3s, 2fr);
-    width: 320px;
+    width: 260px;
     border-radius: 10px;
+  }
+
+  .popup-container .popup-box {
+    max-width: 270px;
+    max-height: 70%;
+    padding: 15px;
+    margin-right: 10%;
+  }
+
+  .popup-box h1 {
+    font-size: 16px;
+  }
+
+  .popup-box p {
+    font-size: 14px;
+  }
+
+  .popup-box .close-btn {
+    font-size: 16px;
   }
 }
