@@ -1,11 +1,28 @@
-const usernameInput = document.querySelector('#username');
-const commentInput = document.querySelector('#input_comment');
-const commentButton = document.querySelector('.comment-btn');
-const commentSection = document.querySelector('.comment-card');
+const navLinks = document.querySelectorAll('nav ul li a');
 
-usernameInput.addEventListener('input', toggleButtonState);
-commentInput.addEventListener('input', toggleButtonState);
-commentButton.addEventListener('click', addComment);
+const scrollToTarget = (targetId) => {
+  const targetElement = document.querySelector(`#${targetId}`);
+  targetElement?.scrollIntoView({
+    behavior: 'smooth'
+  });
+};
+
+const markActiveLink = (activeLink) => {
+  navLinks.forEach((navLink) => navLink.classList.remove('active'));
+  activeLink?.classList.add('active');
+};
+
+navLinks.forEach((link) => {
+  link.addEventListener('click', (event) => {
+    event.preventDefault();
+
+    const targetId = link.getAttribute('href').substring(1);
+
+    scrollToTarget(targetId);
+
+    markActiveLink(link);
+  });
+});
 
 const togglePopup = (popupId) => {
   const popupContainer = document.querySelector(`#${popupId}`);
@@ -31,6 +48,15 @@ document.addEventListener('click', (event) => {
   const popupId = popupTrigger.getAttribute('data-popup-id');
   if (popupId) togglePopup(popupId);
 });
+
+const usernameInput = document.querySelector('#username');
+const commentInput = document.querySelector('#input_comment');
+const commentButton = document.querySelector('.comment-btn');
+const commentSection = document.querySelector('.comment-card');
+
+usernameInput.addEventListener('input', toggleButtonState);
+commentInput.addEventListener('input', toggleButtonState);
+commentButton.addEventListener('click', addComment);
 
 function toggleButtonState() {
   const isInputValid = usernameInput.value.trim() && commentInput.value.trim();

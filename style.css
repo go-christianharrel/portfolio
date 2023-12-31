@@ -205,7 +205,8 @@ ul li a:hover {
   line-height: 1.8;
 }
 
-.container .box-container .box a, .show-popup {
+.container .box-container .box a,
+.show-popup {
   display: inline-block;
   margin-top: 10px;
   background: var(--primary-color);
@@ -488,7 +489,6 @@ ul li a:hover {
     max-width: 270px;
     max-height: 70%;
     padding: 15px;
-    margin-right: 10%;
   }
 
   .popup-box h1 {
