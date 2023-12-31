@@ -1,185 +1,124 @@
-const apiUrl = "https://projectvrzn.online/api/rest_api.php";
+const apiUrl = 'https://book-information-c2239-default-rtdb.asia-southeast1.firebasedatabase.app/book-information';
 
-document.addEventListener("DOMContentLoaded", () => {
-  readBooks();
+function clearForm() {
+  document
+    .querySelectorAll('#title, #author, #language')
+    .forEach((input) => (input.value = ''));
 
-  const bookForm = document.querySelector("#book_form");
+  document.querySelector('#genre').value = 'Drama';
+  document.querySelector('#shelf').value = 'Want To Read';
+}
 
-  if (bookForm) {
-    bookForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-      validateForm()
-        ? document.querySelector("#book_id").value
-          ? performUpdate()
-          : createBook()
-        : null;
-    });
+function resetForm() {
+  const submitButton = document.querySelector('#book_form button');
+  submitButton.innerText = 'Submit';
+  submitButton.onclick = createBook;
+  clearForm();
+}
 
-    ["title", "author", "language", "genre", "shelf"].forEach((id) => {
-      document.querySelector(`#${id}`).addEventListener("input", validateForm);
-    });
+function readBooks() {
+  fetch(`${apiUrl}.json`)
+    .then((response) => response.json())
+    .then((data) => {
+      const tableBody = document.querySelector('#table_body');
+      tableBody.innerHTML = '';
 
-    validateForm();
-  } else {
-    console.error("Error: Book form not found.");
-  }
-});
+      if (!data) return;
 
-function validateForm() {
-  const formInputs = ["title", "author", "language", "genre", "shelf"];
-  const isValid = formInputs.every(
-    (id) => document.querySelector(`#${id}`).value.trim() !== ""
-  );
+      Object.entries(data).forEach(([bookId, book]) => {
+        const row = tableBody.insertRow();
 
-  const submitButton = document.querySelector("#book_form button");
-  submitButton && (submitButton.disabled = !isValid);
+        ['title', 'author', 'language', 'genre', 'shelf'].forEach((key) => {
+          const cell = row.insertCell();
+          cell.innerHTML = book[key] || '';
+        });
 
-  return isValid;
+        const actionsCell = row.insertCell();
+        actionsCell.appendChild(
+          createButton('Update', () => updateBook(bookId, book))
+        );
+        actionsCell.appendChild(
+          createButton('Delete', () => deleteBook(bookId))
+        );
+      });
+    })
+    .catch((error) => console.error('Error reading data:', error.message));
 }
 
 function createBook() {
   const bookData = {
-    title: getValue("#title"),
-    author: getValue("#author"),
-    language: getValue("#language"),
-    genre: getValue("#genre"),
-    shelf: getValue("#shelf"),
-    action: "POST",
+    title: getValue('#title'),
+    author: getValue('#author'),
+    language: getValue('#language'),
+    genre: getValue('#genre'),
+    shelf: getValue('#shelf')
   };
 
-  fetchAndHandle(apiUrl, "POST", bookData);
+  fetch(`${apiUrl}.json`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(bookData)
+  })
+    .then(() => readBooks())
+    .catch((error) => console.error('Error:', error));
+
+  clearForm();
 }
 
-function performUpdate() {
-  const bookData = {
-    id: getValue("#book_id"),
-    title: getValue("#title"),
-    author: getValue("#author"),
-    language: getValue("#language"),
-    genre: getValue("#genre"),
-    shelf: getValue("#shelf"),
-    action: "PATCH",
-  };
-
-  fetchAndHandle(apiUrl, "POST", bookData);
-}
-
-function deleteBook(bookId) {
+function performUpdate(bookId) {
   const bookData = {
     id: bookId,
-    action: "DELETE",
+    title: getValue('#title'),
+    author: getValue('#author'),
+    language: getValue('#language'),
+    genre: getValue('#genre'),
+    shelf: getValue('#shelf')
   };
 
-  fetchAndHandle(apiUrl, "POST", bookData);
-}
-
-function fetchAndHandle(url, method, data) {
-  const formData = new FormData();
-
-  for (const key in data) {
-    formData.append(key, data[key]);
-  }
-
-  fetch(url, {
-    method: method,
-    body: formData,
+  fetch(`${apiUrl}/${bookId}.json`, {
+    method: 'PUT',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(bookData)
   })
-    .then((response) => response.json())
-    .then((data) => handleResponse(data))
-    .catch((error) => {
-      console.error(
-        `Error ${
-          method === "POST"
-            ? "creating"
-            : method === "PATCH"
-            ? "updating"
-            : "deleting"
-        } book:`,
-        error.message
-      );
-      handleResponse({
-        message: `Error ${
-          method === "POST"
-            ? "creating"
-            : method === "PATCH"
-            ? "updating"
-            : "deleting"
-        } book. Please try again.`,
-      });
-    });
-}
-
-function handleResponse(data) {
-  const outputElement = document.querySelector("#output");
-  outputElement && (outputElement.innerHTML = data.message);
-
-  readBooks();
+    .then(() => readBooks())
+    .catch((error) => console.error('Error:', error));
+    
   resetForm();
 }
 
-function readBooks() {
-  fetch(apiUrl)
-    .then((response) =>
-      response.ok
-        ? response.json()
-        : Promise.reject(`HTTP error! Status: ${response.status}`)
-    )
-    .then((data) => {
-      const tableBody = document.querySelector("#table_body");
-
-      if (tableBody) {
-        tableBody.innerHTML = "";
-
-        data.forEach((book) => {
-          const row = tableBody.insertRow();
-
-          for (const key in book) {
-            const cell = row.insertCell();
-            cell.innerHTML = book[key] || "";
-          }
-
-          const actionsCell = row.insertCell();
-          const updateButton = createButton("Update", () => updateBook(book));
-          const deleteButton = createButton("Delete", () =>
-            deleteBook(book.id)
-          );
-          actionsCell.appendChild(updateButton);
-          actionsCell.appendChild(deleteButton);
-        });
-      }
-
-      const outputElement = document.querySelector("#output");
-      outputElement && (outputElement.innerHTML = "");
-    })
-    .catch((error) => {
-      console.error("Error reading books:", error.message);
-    });
+function deleteBook(bookId) {
+  fetch(`${apiUrl}/${bookId}.json`, {
+    method: 'DELETE',
+    headers: { 'Content-Type': 'application/json' }
+  })
+    .then(() => readBooks())
+    .catch((error) => console.error('Delete Error:', error));
 }
 
 function createButton(text, onClick) {
-  const button = document.createElement("button");
+  const button = document.createElement('button');
   button.textContent = text;
   button.onclick = onClick;
   return button;
 }
 
-function updateBook(book) {
-  document.querySelector("#genre").removeEventListener("change", validateForm);
-  document.querySelector("#shelf").removeEventListener("change", validateForm);
+function updateBook(bookId, book) {
+  ['genre', 'shelf'].forEach((id) =>
+    document
+      .querySelector(`#${id}`)
+      .removeEventListener('change', validateForm)
+  );
 
-  setValue("#book_id", book.id);
-  setValue("#title", book.title);
-  setValue("#author", book.author);
-  setValue("#language", book.language);
-  setValue("#genre", book.genre);
-  setValue("#shelf", book.shelf);
+  setValue('#book_id', bookId);
+  Object.keys(book).forEach((key) => setValue(`#${key}`, book[key]));
 
-  const createButton = document.querySelector("#book_form button");
-  createButton.textContent = "UPDATE";
-  createButton.onclick = performUpdate;
+  const createButton = document.querySelector('#book_form button');
+  createButton.textContent = 'UPDATE';
+  createButton.onclick = () => performUpdate(bookId);
 
-  document.querySelector("#genre").addEventListener("change", validateForm);
-  document.querySelector("#shelf").addEventListener("change", validateForm);
+  ['genre', 'shelf'].forEach((id) =>
+    document.querySelector(`#${id}`).addEventListener('change', validateForm)
+  );
 }
 
 function setValue(selector, value) {
@@ -190,18 +129,39 @@ function getValue(selector) {
   return document.querySelector(selector).value;
 }
 
-function resetForm() {
-  const bookForm = document.querySelector("#book_form");
+function validateForm() {
+  const isValid = ['title', 'author', 'language', 'genre', 'shelf'].every(
+    (id) => document.querySelector(`#${id}`).value.trim() !== ''
+  );
 
-  if (bookForm) {
-    bookForm.reset();
-    const createButton = document.querySelector("#book_form button");
+  const submitButton = document.querySelector('#book_form button');
+  submitButton && (submitButton.disabled = !isValid);
 
-    if (createButton) {
-      createButton.textContent = "Submit";
-      createButton.onclick = createBook;
-    }
-  } else {
-    console.error("Error resetting form: Book form not found.");
-  }
+  return isValid;
 }
+
+document.addEventListener('DOMContentLoaded', () => {
+  readBooks();
+
+  const bookForm = document.querySelector('#book_form');
+
+  if (!bookForm) {
+    console.error('Error: Book form not found.');
+    return;
+  }
+
+  bookForm.addEventListener('submit', (event) => {
+    event.preventDefault();
+    validateForm()
+      ? document.querySelector('#book_id').value
+        ? performUpdate(document.querySelector('#book_id').value)
+        : createBook()
+      : null;
+  });
+
+  ['title', 'author', 'language', 'genre', 'shelf'].forEach((id) =>
+    document.querySelector(`#${id}`).addEventListener('input', validateForm)
+  );
+
+  validateForm();
+});
