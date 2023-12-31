@@ -151,6 +151,20 @@ ul li a:hover {
   margin-bottom: 15px;
 }
 
+.socials {
+  display: flex;
+  gap: 1rem;
+}
+
+.socials a:hover {
+  transform: scale(1.1);
+  transition: 0.3s;
+}
+
+.socials img {
+  width: 60px;
+}
+
 .profile-image {
   display: grid;
   place-items: center;
@@ -221,16 +235,16 @@ ul li a:hover {
   outline: none;
 }
 
-.show-popup.letter{
+.show-popup.letter {
   grid-column: span 3;
-  background: #ffffff;;
+  background: #ffffff;
   color: var(--text-dark);
   padding: 20px 20px;
-  font-size: 1.10em;
+  font-size: 1.1em;
   font-weight: bold;
 }
 
-.show-popup.letter:hover{
+.show-popup.letter:hover {
   background: var(--primary-color);
   color: var(--extra-light);
 }
@@ -489,6 +503,14 @@ ul li a:hover {
     gap: 15px;
   }
 
+  .container .heading {
+    font-size: 30px;
+  }
+
+  .socials {
+    margin: auto;
+  }
+
   .testimonials-grid {
     grid-template-columns: 1fr;
   }
@@ -500,7 +522,7 @@ ul li a:hover {
     border-radius: 10px;
   }
 
-  .show-popup.letter{
+  .show-popup.letter {
     grid-column: span 1;
     grid-area: 1;
   }
