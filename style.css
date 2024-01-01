@@ -313,6 +313,15 @@ ul li a:hover {
   color: var(--text-dark);
 }
 
+.name a {
+  text-decoration: none;
+  color: inherit; 
+}
+
+.name a:hover {
+  color: inherit; 
+}
+
 .card hr {
   width: 40px;
   margin: auto;
