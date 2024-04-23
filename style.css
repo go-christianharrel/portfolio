@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
 
 :root {
   --primary-color: #00a8e8;
@@ -11,7 +11,7 @@
 }
 
 * {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -315,11 +315,11 @@ ul li a:hover {
 
 .name a {
   text-decoration: none;
-  color: inherit; 
+  color: inherit;
 }
 
 .name a:hover {
-  color: inherit; 
+  color: inherit;
 }
 
 .card hr {
